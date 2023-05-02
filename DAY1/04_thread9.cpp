@@ -25,12 +25,16 @@ void sum(IT first, IT last, RT& result)
 {
     result = std::accumulate(first, last, result);
 }
-
 int main()
 {
     init();
 
     int s = 0;
-    sum(v.begin(), v.end(), s);
+//  sum(v.begin(), v.end(), s); // 주스레드가 직접 호출
+
+    std::thread t(sum, v.begin(), v.end(), std::ref(s));
+                // 왜 에러일까요 ?
+
+
     std::cout << s << std::endl;
 }
