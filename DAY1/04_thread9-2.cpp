@@ -6,6 +6,7 @@
 #include <iostream>
 
 constexpr std::size_t sz = 1000000;
+//constexpr std::size_t sz = 110;
 
 std::vector<int> v;
 
@@ -55,7 +56,8 @@ RT parallel_sum(IT first, IT last, RT init)
                 std::min(cnt_hw_thread, max_cnt_thread);
 
     std::cout << cnt_thread << std::endl;
-    return 0;
+
+    return 0; 
 }
 
 
