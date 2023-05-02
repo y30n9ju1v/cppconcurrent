@@ -6,8 +6,7 @@
 #include <iostream>
 #include "chronometry.h" // 성능측정을 위해서..
 
-
-constexpr std::size_t sz = 1000000;
+constexpr std::size_t sz = 10000000;
 //constexpr std::size_t sz = 110;
 
 std::vector<int> v;
@@ -95,4 +94,6 @@ int main()
 
     chronometry(f1); // f1의 수행시간을 출력
     chronometry(f2); // f2의 수행시간을 출력
+    chronometry(f1); 
+    chronometry(f2);
 }
