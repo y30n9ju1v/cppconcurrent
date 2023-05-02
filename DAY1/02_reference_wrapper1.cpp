@@ -24,6 +24,7 @@ int main()
 //						대입연산시 "가리키던 값이 대입"
 // std::reference_wrapper : 이동 가능한 참조
 //						대입연산시 "참조 자체가 이동"
+// C++20 의 std::ref_view 가 reference_wrapper 를 발전시킨 개념
 
 
 
