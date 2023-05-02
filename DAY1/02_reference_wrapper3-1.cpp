@@ -33,3 +33,7 @@ std::reference_wrapper<T> ref(T& obj)
 {
 	return std::reference_wrapper<T>(obj);
 }
+// 정리
+// forward_foo 가 call by value 로 설계되었을때 
+// forward_foo(n); // n을 그대로 전달
+// forward_foo(std::ref(n)); // n을 참조로 전달해 달라.
