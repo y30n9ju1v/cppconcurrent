@@ -35,10 +35,27 @@ RT parallel_sum(IT first, IT last, RT init)
 
     // 2. 현재 PC에서 동시 실행가능한 스레드 갯수 구하기
     // => 일반적으로 CPU갯수 * 2
-    auto cnt_hw_thread = std::thread::hardware_concurrency;
+    std::size_t cnt_hw_thread = std::thread::hardware_concurrency();
 
     if (cnt_hw_thread == 0) // 정보를 구할수 없다면
         cnt_hw_thread = 2;
+
+    std::cout << cnt_hw_thread << std::endl;
+
+    // 3. 데이타 양에 따른 스레드의 갯수
+    // => 한개의 스레드는 "최소 25개"의 데이타를 처리해야 한다고 가정
+
+    const std::size_t cnt_per_thread = 25;
+
+    const std::size_t max_cnt_thread =
+        (cnt_element + cnt_per_thread - 1) / cnt_per_thread;
+
+    // 최종적인 스레드의 갯수
+    const std::size_t cnt_thread =
+                std::min(cnt_hw_thread, max_cnt_thread);
+
+    std::cout << cnt_thread << std::endl;
+    return 0;
 }
 
 
