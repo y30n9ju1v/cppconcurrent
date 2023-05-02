@@ -41,6 +41,8 @@ int main()
 	std::cout << v2 << std::endl; // 
 	std::cout << r1 << std::endl; // 
 	std::cout << r2 << std::endl; // 
+		// 1. cout 으로 출력 가능한 타입으로 변환되는지 조사		
+		// 2. cout << r2.operator int&() 로 변경!
 }
 
 
