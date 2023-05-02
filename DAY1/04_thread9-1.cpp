@@ -29,7 +29,7 @@ void sum(IT first, IT last, RT& result)
 template<typename IT, typename RT>
 RT parallel_sum(IT first, IT last, RT init)
 {
-    
+    // 주어진 구간의 합을 멀티 스레드로 구해서 반환
 }
 int main()
 {
