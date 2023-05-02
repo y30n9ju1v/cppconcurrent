@@ -36,4 +36,7 @@ int main()
                 // "std::thread t(전달된인자)" 로 생성
     }
 
+    std::for_each(v.begin(), v.end(), 
+                        [](auto& t) {t.join(); });
+
 }
