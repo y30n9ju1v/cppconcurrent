@@ -36,7 +36,8 @@ int main()
 //  std::thread t3(&w, 1, 3.4);// error
 
     // 4. 람다 표현식도 가능
-    std::thread t4([](int a) {std::cout << "lambda\n"; }, 0);
+    std::thread t4([]() {std::cout << "lambda\n"; });
+//  std::thread t5([](int a) {std::cout << "lambda\n"; }, 0);
     //                  함수,                             인자
 }
 
