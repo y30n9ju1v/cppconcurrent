@@ -23,16 +23,19 @@ void sum(IT first, IT last, RT& result)
 {
     result = std::accumulate(first, last, result);
 }
+
+// 주어진 구간의 합을 병렬로 구하는 함수!!
+// => STL 의 병렬 함수들의 원리와 유사합니다.
+template<typename IT, typename RT>
+RT parallel_sum(IT first, IT last, RT init)
+{
+    
+}
 int main()
 {
     init();
 
-    int s = 0;
-
-    std::thread t(sum<std::vector<int>::iterator, int>,
-        v.begin(), v.end(), std::ref(s));
-
-    t.join();
+    int s = parallel_sum(v.begin(), v.end(), 0);
 
     std::cout << s << std::endl;
 }
