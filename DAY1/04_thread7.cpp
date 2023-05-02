@@ -16,7 +16,8 @@ int main()
     // 2. copy 는 안되고, move 는 가능합니다.
 //  std::thread t3 = t1;            // error. copy 는 안됨
     std::thread t4 = std::move(t1); // ok
-
+                    // t1은 자원 없으므로
+                    // t1.join() 할수 없습니다.
     t2.join();
     t4.join();
 
@@ -33,15 +34,4 @@ int main()
     // 객체가 아닌 스레드 자체를 미리 만들수 없나요 ?
     // => 내일 thread pool 할때 합니다.
 }
-
-
-
-void f1(std::thread t) 
-{
-    t.join(); 
-}
-
-std::thread f2()
-{
-    return std::thread(foo());
-}
+// thread& operator=(thread&& __t) 
