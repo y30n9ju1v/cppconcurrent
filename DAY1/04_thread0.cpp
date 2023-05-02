@@ -1,21 +1,24 @@
+// 04_thread0.cpp - git ø°º≠ ∫πªÁ«ÿ ø¿ººø‰.
 #include <Windows.h>
 #include <iostream>
 
 DWORD __stdcall foo(void* p)
 {
 	std::cout << "foo" << std::endl;
-
 	return 100;
 }
 
 int main()
 {
 	HANDLE handle = CreateThread(0, 0, foo, 0, 0, 0);
+					// ∏Æ¥™Ω∫ : pthread_create()
 
-	Sleep(1000); // 1Ï¥à ÎåÄÍ∏∞
+	Sleep(1000); // 1√  ¥Î±‚
 
+	// Ω∫∑πµÂ ¿⁄√º¥¬ ¡æ∑· µ«æ˙¡ˆ∏∏ Ω∫∑πµÂ∏¶ ∞¸∏Æ«œ¥¬ OS∞° ¿Ø¡ˆ«œ¥¬
+	// ∞¥√º¥¬ ∏ﬁ∏∏Æø° ≥≤æ∆ ¿÷Ω¿¥œ¥Ÿ.
+	// µ˚∂Ûº≠, ¡æ∑· ƒ⁄µÂ∏¶±∏«“ºˆ ¿÷Ω¿¥œ¥Ÿ.
 	DWORD n = 0;
-	
 	GetExitCodeThread(handle, &n);
 
 	std::cout << n << std::endl;
