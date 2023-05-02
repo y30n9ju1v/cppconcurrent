@@ -39,5 +39,7 @@ int main()
     auto t1 = createDateTime(2023, 5, 2, 12, 0, 0);
     std::this_thread::sleep_until(t1);
 }
-// sleep   : 스스로 재우는 함수
-// suspend : 일반적으로 다른 스레드를 재울때 사용
+// sleep   : 스스로 재우는 함수. 특정 시간 만큼
+//           주기적으로 확인해야 한다.
+// suspend : 일반적으로 다른 스레드를 재울때 사용. resume 으로 깨울때 까지
+//           active-list 에서 block list 로 이동
