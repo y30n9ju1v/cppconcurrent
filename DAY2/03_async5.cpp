@@ -8,7 +8,8 @@
 #include <execution>
 #include "chronometry.h"
 
-static const int NUM = 100000000; // 1¾ï
+//static const int NUM = 100000000; // 1¾ï
+static const int NUM = 10000000; // 
 
 std::vector<int> v1, v2;
 
