@@ -21,6 +21,8 @@ void foo(const std::string& name)
     for (int i = 0; i < 10; i++)
     {
         m.lock();
+        // 아래 구간은 한개의 스레드씩 통과해야 합니다 - 직렬화(serialization)
+        // 흔히 아래 구간을 임계영역(critical section) 이라고도 합니다.
         //--------------------------------
         x = 100;   delay();
         x = x + 1; delay();
