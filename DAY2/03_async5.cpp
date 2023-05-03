@@ -44,7 +44,15 @@ long long f2()
     auto v1_first = v1.begin();
     auto v2_first = v2.begin();
     auto v1_last = std::next(v1.begin(), block_size);
+
+    // std::thread : 결과를 얻기 위해 다양한 기법을 사용해야 합니다.
+    // std::async  : 기존 함수의 반환값을 그대로 사용 가능.
     
+    std::future<long long> ft1 = std::async(
+        []() { return std::inner_product(v1_first, v1_last,
+            v2_first, 0LL); }
+    );
+
 }
 
 
