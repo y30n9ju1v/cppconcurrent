@@ -3,6 +3,18 @@
 #include <mutex>
 #include <exception>
 
+// 핵심 : 사용자가 직접 lock(), unlock()을 사용하면
+//       공유 자원 사용시 문제(예외)가 발생하면
+//       대기 중인 스레드가 깨어날수 없게 됩니다.(deadlock)
+
+/*
+m.lock();
+
+// 여기서 예외가 나오면 unlock 안됩니다.
+
+m.unlock();
+*/
+
 std::mutex m;
 
 void goo()
