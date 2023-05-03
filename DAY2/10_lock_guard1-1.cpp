@@ -9,15 +9,16 @@ void goo()
 {
     // 자원의 획득/반납은 반드시 직접하지 말고
     // 생성자/소멸자에 의존해야 합니다.
-    std::lock_guard<std::mutex> g(m);
-
+    std::lock_guard<std::mutex> g(m); // g의 생성자에서
+                                      // m.lock()
 //    m.lock();
 
     std::cout << "using shared data" << std::endl;
     throw std::runtime_error("goo fail");
 
 //    m.unlock();
-}
+}   // <<= 지역변수인 g 파괴, 소멸자 호출
+    // <<= 소멸자에서 unlock 수행
 
 
 
