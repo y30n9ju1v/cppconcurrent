@@ -26,7 +26,17 @@ int main()
     std::promise<int> pm;
     std::future<int> ft = pm.get_future();
 
-    std::thread t(work3, std::move(pm), std::ref(v2));
+    // 스레드로 작업을 수행할때
+    // 1. 별도의 함수로 분리해서 실행 - promise4-1번 예제
+    // => main 에서 만든 변수를 인자로 전달해서 사용
+    // std::thread t(work3, std::move(pm), std::ref(v2));
+
+    // 2. 람다 표현식으로 실행
+    std::thread t([&pm, &v2]() 
+        {
+            int s = std::accumulate(v2.begin(), v2.end(), 0);
+            pm.set_value(s);
+        } );
 
 
 
