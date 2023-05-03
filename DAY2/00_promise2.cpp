@@ -45,7 +45,17 @@ int main()
 	std::cout << "continue main\n";
 
 	// 4. 스레드의 결과가 필요 할때 future 객체에서 꺼내면 됩니다.
-	int ret = ft.get();
+	int ret = ft.get(); // 결과가 있으면 즉시 꺼내고
+						// 없으면(스레드가 아직 연산중이면)
+						// 결과가 나올때 까지 대기.
 
 	std::cout << ret << std::endl;
 }
+// promise 만 사용하면 되지 ?? 왜 future 로 나누나요 ?
+// => 일반화된 모델 설계
+// => promise & future
+// => packaged_task & future
+// => async & future
+
+// 여러개의 future 를 만들어서 여러 스레드가 
+// 하나의 결과를 대기하는 기술도 가능
