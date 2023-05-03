@@ -18,6 +18,21 @@ using namespace std::literals;
 std::shared_mutex m;
 int share_data = 0;
 
+
+// shared_mutex 동작 방식
+
+// m.lock() 하면 : 다른 스레드의 m.lock(), m.lock_shared()는
+//                  모두 대기
+//              => "쓰는 동안" 은 "모두 금지"
+
+// m.lock_shared() : 다른 스레드의 m.lock()은 대기
+//                               m.lock_shared()는 대기 안함
+//              => "읽는 동안" 은 "쓰기 금지", "읽기 가능"
+
+// Writer : m.lock(), m.unlock()
+// Reader : m.lock_shared(), m.unlock_shared()
+
+
 void Writer()
 {
     while (1)
