@@ -7,7 +7,12 @@
 int next3times()
 {
 //	int n = 0;		// stack, 스레드당 한개 씩 생성됨
-	static int n = 0; // static 모든 스레드가 공유.. 
+//	static int n = 0; // static 모든 스레드가 공유.. 
+
+	thread_local static int n = 0; 
+					// 스레드당 한개의 static 메모리 공간에 할당
+					// TSS(thread specifit storage)또는
+					// TLS(thread local storage) 라고 합니다
 	n = n + 3;
 	return n;
 }
@@ -40,3 +45,13 @@ int main()
 //				OS 마다 다를수 있음.
 
 
+
+int g1 = 0; // 전역변수 모든 스레드가 공유 합니다.
+thread_local int g2 = 0; // 스레드당 각각의 전역변수
+						// TSS 공간에 할당됩니다.
+
+// 일반적으로 OS에는 TSS 공간의 크기가 제한 되어 있습니다.
+// => 커다란 데이타를 사용하려면 스레드별로 힙에 할당하고
+//    TSS에는 주소를 보관하세요
+
+// WIndows OS : TSS 크기는 sizeof(int)*1088 입니다.
