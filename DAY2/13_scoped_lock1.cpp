@@ -22,7 +22,7 @@ void transfer(Account& acc1, Account& acc2, int cnt)
 
     // 해결책은 
     // 모두 획득하거나, 하나도 획득하지 않거나 해야 합니다.
-    std::lock(acc1.m, acc2.m);
+    std::lock(acc1.m, acc2.m); // 모두 획득할때 까지 대기
 
     acc1.money -= cnt;
     acc2.money += cnt;
