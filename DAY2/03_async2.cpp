@@ -28,7 +28,6 @@ int main()
     // ==> 옵션 생략시, 디폴트값
     std::future<int> ft = std::async( add, 10, 20);
 
-
     std::cout << "continue main : " << std::this_thread::get_id() << std::endl;
     std::this_thread::sleep_for(2s);
 
