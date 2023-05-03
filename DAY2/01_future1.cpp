@@ -23,7 +23,7 @@ int main()
     // int n1 = ft.get(); 
 
     // 2. timeout 을 지정하려면 wait_for 로 하세요
-    std::future_status ret = ft.wait_for(2s);
+    std::future_status ret = ft.wait_for(10s);
 
     // std::future_status : enum 타입입니다.
     if (ret == std::future_status::ready)
@@ -42,7 +42,7 @@ int main()
         // => std::async() 사용시에만 나올수 있는 값
         // => std::thread 로 만들 경우는 해당 안됨.
     }
-//    t.join();
+    t.join();
 }
 
 
