@@ -21,6 +21,20 @@ void goo()
     // <<= 소멸자에서 unlock 수행
 
 
+void hoo()
+{
+    // 함수가 종료되기 전에 lock 을 해지 하려면 
+    // 어떻게 하나요 ??
+    // => {} 를 사용하세요
+    {
+        std::lock_guard<std::mutex> g(m);
+        // ...
+    } // <== 여기서 unlock 됩니다
+
+    //....
+}
+
+
 
 void foo()
 {
