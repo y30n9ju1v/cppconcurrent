@@ -30,9 +30,8 @@ int main()
     std::promise<int> pm;
     std::future<int>  ft = pm.get_future();
 
-    std::thread t(divide, std::move(pm), 10, 2);
-
-
+//  std::thread t(divide, std::move(pm), 10, 2);
+    std::thread t(divide, std::move(pm), 10, 0); // ¿¹¿Ü!
     try
     {
         int ret = ft.get();
