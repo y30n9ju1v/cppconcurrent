@@ -49,21 +49,49 @@ long long f2()
     // std::async  : 기존 함수의 반환값을 그대로 사용 가능.
     
     std::future<long long> ft1 = std::async(
-        []() { return std::inner_product(v1_first, v1_last,
-            v2_first, 0LL); }
+        [v1_first, v2_first, v1_last] 
+        { return std::inner_product(v1_first, v1_last, v2_first, 0LL); }
     );
+    // 위 스레드 생성시, 반복자를 값 캡쳐(복사본) 했으므로
+    // main의 원래 반복자는 변경해도 안전합니다.
+    std::advance(v1_first, block_size);
+    std::advance(v2_first, block_size);
+    std::advance(v1_last,  block_size);
 
+    std::future<long long> ft2 = std::async(
+        [v1_first, v2_first, v1_last]
+        { return std::inner_product(v1_first, v1_last, v2_first, 0LL); }
+        );
+
+    std::advance(v1_first, block_size);
+    std::advance(v2_first, block_size);
+    std::advance(v1_last, block_size);
+
+    std::future<long long> ft3 = std::async(
+        [v1_first, v2_first, v1_last]
+        { return std::inner_product(v1_first, v1_last, v2_first, 0LL); }
+        );
+    
+    std::advance(v1_first, block_size);
+    std::advance(v2_first, block_size);
+    v1_last = v1.end();
+
+    std::future<long long> ft4 = std::async(
+        [v1_first, v2_first, v1_last]
+        { return std::inner_product(v1_first, v1_last, v2_first, 0LL); }
+        );
+
+    // 이제 각각의 결과를 대기했다가 더하면 됩니다.
+    return ft1.get() + ft2.get() + ft3.get() + ft4.get();
 }
-
-
-
-
-
-
 
 int main()
 {
     fill_vector();
     
-    f1();
+    // 성능비교
+    chronometry(f1);
+    chronometry(f2);
+    chronometry(f1);
+    chronometry(f2);
 }
