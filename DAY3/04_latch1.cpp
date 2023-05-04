@@ -2,6 +2,8 @@
 #include <mutex>
 #include <thread>
 #include <latch>
+#include <chrono>
+using namespace std::literals;
 
 // C++11 : mutex, conditional_variable
 // C++17 : shared_mutex
@@ -22,9 +24,11 @@ void foo(const std::string& name)
 
 	complete_cnt.count_down(); // 카운트 감소
 	
+	std::this_thread::sleep_for(1s);
+
 	std::cout << "go home     : " << name << std::endl;
 }
-int main()
+int main()  
 {
 	std::jthread t1(foo, "kim"), 
 		         t2(foo, "lee"), 
