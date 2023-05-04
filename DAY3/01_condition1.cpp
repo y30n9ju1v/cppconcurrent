@@ -9,6 +9,9 @@ using namespace std::literals;
 // 단점 : 생산자가 시간이 걸리는데(10ms) 
 //       생산하기 전에 소비자가 소비(쓰레기값 -1)를 하게 됩니다.
 
+// 해결책 : 소비자는 생산자가 생산을 마칠때 까지 대기해야 합니다.
+// => std::condition_variable (조건변수)
+
 std::mutex m;
 int shared_data = -1; // 쓰레기값
 
