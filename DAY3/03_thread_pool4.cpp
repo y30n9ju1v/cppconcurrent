@@ -56,6 +56,7 @@ public:
 		std::function<void()> f = std::bind(task, args...);
 //		f(); // f는 인자 없는 함수 처럼 사용.. 
 			 // task(인자들) 로 호출
+
 		{
 			std::lock_guard<std::mutex> g(m);
 			task_q.push(f);
@@ -69,9 +70,9 @@ int main()
 	ThreadPool tp(3);
 
 	tp.add_task(foo);
+	tp.add_task(goo, 1, 3.4);
 	tp.add_task(foo);
-	tp.add_task(foo);
-	tp.add_task(foo);
+	tp.add_task(goo, 2, 5.5);
 	tp.add_task(foo);
 
 	getchar();
@@ -87,6 +88,15 @@ void foo()
 	for (int i = 0; i < 10; i++)
 	{
 		std::cout << "foo : " << std::this_thread::get_id() << std::endl;
+		std::this_thread::sleep_for(400ms);
+	}
+}
+
+void goo(int a, double d )
+{
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << "goo : " << std::this_thread::get_id() << std::endl;
 		std::this_thread::sleep_for(400ms);
 	}
 }
