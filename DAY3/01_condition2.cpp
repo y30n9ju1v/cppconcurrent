@@ -21,7 +21,11 @@ void consumer()
     //    신호를 대기 합니다.
     std::unique_lock<std::mutex> ul(m);
 
-    cv.wait(ul);
+    cv.wait(ul);    // 이 순간
+                    // 1. ul.unlock() 으로 lock 을 풀고 
+                    // 2. cv 에 대해서 신호가 올때를 대기 하다고
+                    // 3. 신호가 오면 다시 ul.lock() 으로 뮤텍스를 획득후
+                    // 4. 아래 줄을 실행합니다.
 
     std::cout << "consume : " << shared_data << std::endl;
 }
@@ -38,6 +42,9 @@ void producer()
     // 3. 생산이 끝나면 lock 을 풀고 신호를 주면 됩니다.
     cv.notify_one();
 }
+
+
+
 
 
 int main()
