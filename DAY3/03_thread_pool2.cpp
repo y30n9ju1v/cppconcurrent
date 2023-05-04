@@ -56,8 +56,7 @@ void add_task(TASK task)
 	}
 	cv.notify_one(); // 작업이 들어 왔으므로 
 					 // 대기중인 스레드들 중에서 한개를 깨운다!
-}
-
+}  
 int main()
 {
 	init_pool(3);
@@ -68,6 +67,7 @@ int main()
 	add_task(foo);
 	add_task(foo);
 
+	getchar();
 }
 
 
