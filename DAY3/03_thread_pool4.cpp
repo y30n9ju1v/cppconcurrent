@@ -7,7 +7,23 @@
 #include <condition_variable>
 using namespace std::literals;
 
-void foo();
+void foo()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << "foo : " << std::this_thread::get_id() << std::endl;
+		std::this_thread::sleep_for(400ms);
+	}
+}
+
+void goo(int a, double d)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << "goo : " << std::this_thread::get_id() << std::endl;
+		std::this_thread::sleep_for(400ms);
+	}
+}
 
 //-------------------------------------------
 class ThreadPool
@@ -49,14 +65,13 @@ public:
 	}
 
 	// 모든 모양의 함수를 받기 위해 가변인자 템플릿 도입
-	template<typename ... ARGS>
-	void add_task(TASK task, ARGS&& ... args)
+	template<typename F, typename ... ARGS>
+	void add_task(F task, ARGS&& ... args)
 	{
 		// "함수 + 인자들" 을 묶어서 f에 보관
 		std::function<void()> f = std::bind(task, args...);
 //		f(); // f는 인자 없는 함수 처럼 사용.. 
 			 // task(인자들) 로 호출
-
 		{
 			std::lock_guard<std::mutex> g(m);
 			task_q.push(f);
@@ -83,20 +98,3 @@ int main()
 
 
 //--------------------------------------------------
-void foo()
-{
-	for (int i = 0; i < 10; i++)
-	{
-		std::cout << "foo : " << std::this_thread::get_id() << std::endl;
-		std::this_thread::sleep_for(400ms);
-	}
-}
-
-void goo(int a, double d )
-{
-	for (int i = 0; i < 10; i++)
-	{
-		std::cout << "goo : " << std::this_thread::get_id() << std::endl;
-		std::this_thread::sleep_for(400ms);
-	}
-}
