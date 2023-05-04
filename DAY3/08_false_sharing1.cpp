@@ -43,6 +43,10 @@ void multi_thread()
 
 int main()
 {
+	// 왜 ?? 멀티스레드가 더 느릴까 ?
 	chronometry(single_thread);
 	chronometry(multi_thread);
+	chronometry(single_thread);
+	chronometry(multi_thread);
+
 }
