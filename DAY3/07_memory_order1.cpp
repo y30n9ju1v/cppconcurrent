@@ -12,7 +12,8 @@ void foo()
     a = b + 1;
 
     // 펜스 설치 : 펜스 위의 코드는 펜스 아래로 내려갈수 없습니다
-    // 
+    // => reordering 금지..
+    // => 컴파일러 최적화라도 순서 바꾸지 말라는 의미
     //    std::atomic_thread_fence(std::memory_order_relaxed);
     std::atomic_thread_fence(std::memory_order_seq_cst);
     b = 1;
